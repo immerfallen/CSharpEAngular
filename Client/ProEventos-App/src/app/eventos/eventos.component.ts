@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,20 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [
-    {
-      Tema: "Angular",
-      Local: "São Paulo"
-    },
-    {
-      Tema: "Dotnet core ",
-      Local: "Balneário Camboriú"
-    }
-  ]
+  public eventos: any;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.getEventos();
   }
 
+  public getEventos(): void {
+
+    this.http.get('https://localhost:5001/api/evento').subscribe(
+      response => this.eventos = response,
+      error => console.log(error)
+    )
+  }
 }
