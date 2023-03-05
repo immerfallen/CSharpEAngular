@@ -1,12 +1,36 @@
+<h2>Eventos {{eventos}}</h2>
+<hr>
+<form action="" class="form-inline">
+  <div class="form-group mb2">
+    <input type="text" class="form-control mr-2" placeholder="buscar"/>
+    <button class="btn btn-outline-success">Buscar</button>
+  </div>
+</form>
+<table class="table table-striped mt-2">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>Image</th>
+      <th>Tema</th>
+      <th>Local</th>
+      <th>Data</th>
+      <th>Qtd Pessoas</th>
+      <th>Lote</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let evento of eventos">
+      <td>{{evento.eventoId}}</td>
+      <td>{{evento.image}}</td>
+      <td>{{evento.tema}}</td>
+      <td>{{evento.local}}</td>
+      <td>{{evento.dataEvento}}</td>
+      <td>{{evento.qtdPessoas}}</td>
+      <td>{{evento.lote}}</td>
+      <td>Editar/Excluir</td>
+    </tr>
+  </tbody>
+</table>
 
-
-
-<p>eventos works!</p>
-
-
-
-<div *ngFor="let evento of eventos">
-  <p>Tema: {{evento.tema}}</p>
-  <p>Local: {{evento.local}}</p>
-
-</div>
+{{eventos | json}}

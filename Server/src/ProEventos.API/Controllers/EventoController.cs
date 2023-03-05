@@ -23,7 +23,8 @@ namespace ProEventos.API.Controllers
         [HttpGet]
         public IEnumerable<Evento> Get()
         {
-            return _context.Evento;
+            var lista = _context.Evento.ToList();
+            return lista;
         }
 
         [HttpGet("{id}")]
