@@ -9,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class EventosComponent implements OnInit {
 
   public eventos: any = [];
+  public eventosFiltrados: any = [];
   public widthImg: number = 150;
   public marginImg: number = 2;
   public showImage: boolean = true;
-  public filterString: string = "";
+  private _filterString: string = "";
+
+  public get filterString(): string{
+    return this._filterString;
+  }
+
+  public set filterString(value: string){
+    this._filterString = value;
+    this.eventosFiltrados = this.filterString ? this.filtrarEventos(this.filterString) : this.eventos;
+  }
+
 
 
   constructor(private http: HttpClient) { }
@@ -23,7 +34,7 @@ export class EventosComponent implements OnInit {
 
   public getEventos(): void {
     this.http.get('https://localhost:5001/api/evento').subscribe(
-      response => this.eventos = response,
+      response => {this.eventos = response; this.eventosFiltrados = response},
       error => console.log(error)
     );
   }
@@ -31,5 +42,13 @@ export class EventosComponent implements OnInit {
   public handleClickShowImage(){
     this.showImage = !this.showImage
   }
+
+  public filtrarEventos(filterString: string): any{
+    filterString = filterString.toLowerCase();
+    return this.eventos.filter(
+      (evento: any) => evento.tema.toLowerCase().indexOf(filterString) !== -1
+      || evento.local.toLowerCase().indexOf(filterString) !== -1
+    )
+      }
 
 }
