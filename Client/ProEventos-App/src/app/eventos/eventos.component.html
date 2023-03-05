@@ -1,16 +1,17 @@
-<h2>Eventos {{eventos}}</h2>
+<h2>Eventos</h2>
 <hr>
-<form action="" class="form-inline">
+<div action="" class="form-inline">
   <div class="form-group mb2">
-    <input type="text" class="form-control mr-2" placeholder="buscar"/>
+    <input [(ngModel)]="filterString" type="text" class="form-control mr-2" placeholder="buscar"/>
     <button class="btn btn-outline-success">Buscar</button>
   </div>
-</form>
+</div>
+<h3>{{filterString}}</h3>
 <table class="table table-striped mt-2" >
   <thead class="thead-dark">
     <tr>
+      <th><button (click)="handleClickShowImage()" class="btn btn-outline-light  btn-sm">{{showImage ? "Mostrar" : "Esconder"}}</button></th>
       <th>#</th>
-      <th>Imagem</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
@@ -21,11 +22,13 @@
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventos">
-      <td>{{evento.eventoId}}</td>
       <td><img src="/assets/{{evento.imagemUrl}}"
         alt="{{evento.imagemUrl}}"
          [style.width.px] = "widthImg"
-         [style.margin.px] = "marginImg" /></td>
+         [style.margin.px] = "marginImg"
+         [isAnimated]="true"
+         [collapse]="showImage"/></td>
+      <td>{{evento.eventoId}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
       <td>{{evento.dataEvento}}</td>
@@ -41,4 +44,4 @@
   </tfoot>
 </table>
 
-{{eventos | json}}
+
