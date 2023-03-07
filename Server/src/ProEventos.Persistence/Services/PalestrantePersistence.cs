@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProEventos.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using ProEventos.Persistence.Interfaces;
 
-namespace ProEventos.Persistence
+namespace ProEventos.Persistence.Services
 {
-    public class ProEventosPersistence : IProEventosPersistence
+    public class PalestrantePersistence : IPalestrantePersistence
     {
 
         private readonly ProEventosContext _context;
-        public ProEventosPersistence(ProEventosContext context)
+        public PalestrantePersistence(ProEventosContext context)
         {
             _context = context;
 
