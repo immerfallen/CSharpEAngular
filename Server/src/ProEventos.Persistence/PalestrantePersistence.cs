@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ProEventos.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using ProEventos.Persistence.Interfaces;
+using ProEventos.Persistence.Context;
 
 namespace ProEventos.Persistence.Services
 {

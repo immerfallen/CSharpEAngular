@@ -8,8 +8,8 @@ namespace ProEventos.Persistence.Interfaces
 {
     public interface IPalestrantePersistence
     {        
-        Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos);
-        Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos);
-        Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos);
+        Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos = false);
+        Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos = false);
+        Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos = false);
     }
 }
