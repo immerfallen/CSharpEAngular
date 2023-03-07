@@ -89,21 +89,49 @@ namespace ProEventos.Persistence
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos)
+        public async Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos =false)
         {
-            throw new NotImplementedException();
+           IQueryable<Palestrante> query = _context.Palestrante.Include(e => e.RedesSociais);
+
+            if (includeEventos)
+            {
+                query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
+            }
+
+            query = query.OrderBy(e => e.Id);
+
+            return await query.ToArrayAsync();
         }
 
-        public Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos)
+        public async Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos)
         {
-            throw new NotImplementedException();
+            IQueryable<Palestrante> query = _context.Palestrante.Include(e => e.RedesSociais);
+
+            if (includeEventos)
+            {
+                query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
+            }
+
+            query = query.OrderBy(e => e.Id).Where(p=> p.Nome.ToLower().Contains(nome.ToLower()));
+
+            return await query.ToArrayAsync();
         }
 
 
 
-        public Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos)
+        public async Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos)
         {
-            throw new NotImplementedException();
+           IQueryable<Palestrante> query = _context.Palestrante.Include(e => e.RedesSociais);
+
+            if (includeEventos)
+            {
+                query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
+            }
+
+            query = query.OrderBy(e => e.Id).Where(p=>p.Id == palestranteId);               
+            
+
+            return await query.FirstOrDefaultAsync();
         }
 
 
