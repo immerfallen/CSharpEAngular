@@ -10,7 +10,7 @@ namespace ProEventos.Application.Interfaces
     {
         Task<Evento> AddEvento(Evento model);
 
-        Task<Evento> UpdateEvento(Evento model);
+        Task<Evento> UpdateEvento(int eventoId,Evento model);
 
         Task<bool> DeleteEvento(int eventoId);
 
