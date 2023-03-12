@@ -54,7 +54,7 @@ namespace ProEventos.Persistence.Services
                 query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Palestrante);
             }
 
-            query = query.OrderBy(e => e.Id);
+            query = query.AsNoTracking().OrderBy(e => e.Id);
 
             return await query.ToArrayAsync();
         }
@@ -70,7 +70,7 @@ namespace ProEventos.Persistence.Services
 
             query = query.OrderBy(e => e.Id);
 
-            query.Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
+            query = query.AsNoTracking().Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
 
             return await query.ToArrayAsync();
         }
@@ -86,7 +86,7 @@ namespace ProEventos.Persistence.Services
 
             query = query.OrderBy(e => e.Id);
 
-            query.Where(e => e.Id == eventoId);
+            query = query.AsNoTracking().Where(e => e.Id == eventoId);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -100,7 +100,7 @@ namespace ProEventos.Persistence.Services
                 query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
             }
 
-            query = query.OrderBy(e => e.Id);
+            query = query.AsNoTracking().OrderBy(e => e.Id);
 
             return await query.ToArrayAsync();
         }
@@ -114,7 +114,7 @@ namespace ProEventos.Persistence.Services
                 query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
             }
 
-            query = query.OrderBy(e => e.Id).Where(p=> p.Nome.ToLower().Contains(nome.ToLower()));
+            query = query.AsNoTracking().OrderBy(e => e.Id).Where(p=> p.Nome.ToLower().Contains(nome.ToLower()));
 
             return await query.ToArrayAsync();
         }
@@ -130,7 +130,7 @@ namespace ProEventos.Persistence.Services
                 query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Evento);
             }
 
-            query = query.OrderBy(e => e.Id).Where(p=>p.Id == palestranteId);               
+            query = query.AsNoTracking().OrderBy(e => e.Id).Where(p=>p.Id == palestranteId);               
             
 
             return await query.FirstOrDefaultAsync();

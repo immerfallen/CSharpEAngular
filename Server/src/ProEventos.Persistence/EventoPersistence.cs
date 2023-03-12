@@ -18,7 +18,7 @@ namespace ProEventos.Persistence.Services
             _context = context;
 
         }
-        
+
 
         public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
@@ -29,7 +29,7 @@ namespace ProEventos.Persistence.Services
                 query.Include(e => e.PalestrantesEventos).ThenInclude(p => p.Palestrante);
             }
 
-            query = query.OrderBy(e => e.Id);
+            query = query.AsNoTracking().OrderBy(e => e.Id);
 
             return await query.ToArrayAsync();
         }
@@ -45,7 +45,7 @@ namespace ProEventos.Persistence.Services
 
             query = query.OrderBy(e => e.Id);
 
-            query.Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
+            query = query.AsNoTracking().Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
 
             return await query.ToArrayAsync();
         }
@@ -61,12 +61,12 @@ namespace ProEventos.Persistence.Services
 
             query = query.OrderBy(e => e.Id);
 
-            query.Where(e => e.Id == eventoId);
+            query = query.AsNoTracking().Where(e => e.Id == eventoId);
 
             return await query.FirstOrDefaultAsync();
         }
 
-        
+
 
 
     }
