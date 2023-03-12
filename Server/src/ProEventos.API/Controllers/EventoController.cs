@@ -58,7 +58,7 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpGet("{tema}/tema")]
-        public async Task<IActionResult> GetByTema(string  tema)
+        public async Task<IActionResult> GetByTema(string tema)
         {
             try
             {
@@ -73,6 +73,62 @@ namespace ProEventos.API.Controllers
             }
         }
 
+        [HttpPost]
 
+        public async Task<IActionResult> Post(Evento model)
+        {
+            try
+            {
+                var evento = await _eventoService.AddEvento(model);
+                if (evento == null) return BadRequest("Erro ao tentar inserir evento");
+
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
+
+            }
+        }
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> Put(int eventoId, Evento model)
+        {
+            try
+            {
+                var evento = await _eventoService.UpdateEvento(eventoId, model);
+                if (evento == null) return BadRequest("Erro ao tentar inserir evento");
+
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
+
+            }
+        }
+
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Delete(int eventoId)
+        {
+            try
+            {
+                if (await _eventoService.DeleteEvento(eventoId))
+                {
+                    return Ok("Evento excluído com sucesso.");
+                }
+                else
+                {
+                    return BadRequest("Erro ao tentar excluir evento");
+                }               
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar excluir evento. Erro: {ex.Message}");
+
+            }
+        }
     }
 }
