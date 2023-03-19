@@ -4,26 +4,15 @@ import { RedeSocial } from "./RedeSocial"
 
 export interface Evento {
 
- Id: number
-
- Local: string
-
- DataEvento?: Date
-
- Tema: string
-
- QtdPessoas: number
-
- Lote: Lote[]
-
- RedesSociais: RedeSocial[]
-
- ImagemUrl: string
-
- Telefone: string
-
- Email: string
-
- PalestrantesEventos: PalestranteEvento[]
-
+ id: number
+ local: string
+ dataEvento?: Date
+ tema: string
+ qtdPessoas: number
+ lote: Lote[]
+ redesSociais: RedeSocial[]
+ imagemUrl: string
+ telefone: string
+ email: string
+ palestrantesEventos: PalestranteEvento[]
 }

@@ -3,17 +3,11 @@ import { Palestrante } from "./Palestrante"
 
 export interface RedeSocial {
 
-  Id: number
-
-  Nome: string
-
-  Url: string
-
-  EventoId?: number
-
-  Evento: Evento
-
-  PalestranteId?: number
-
-  Palestrante: Palestrante
+  id: number
+  nome: string
+  url: string
+  eventoId?: number
+  evento: Evento
+  palestranteId?: number
+  palestrante: Palestrante
 }

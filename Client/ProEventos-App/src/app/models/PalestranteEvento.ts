@@ -3,9 +3,9 @@ import { Palestrante } from "./Palestrante"
 
 export interface PalestranteEvento {
 
-  Id: number
-  PalestranteId: number
-  Palestrante: Palestrante
-  EventoId: number
-  Evento: Evento
+  id: number
+  palestranteId: number
+  palestrante: Palestrante
+  eventoId: number
+  evento: Evento
 }
